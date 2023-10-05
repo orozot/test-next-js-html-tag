@@ -1,5 +1,7 @@
+'use client';
 import Image from 'next/image'
 import styles from './page.module.css'
+import {useEffect, useState} from "react";
 
 const avatarList = [
   {
@@ -18,7 +20,13 @@ const avatarList = [
 
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   return (
+      mounted &&
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
@@ -109,16 +117,13 @@ export default function Home() {
       <div>
         <div>
           {avatarList.map((avatar) => (
-              <Image
+              <img
+                key={avatar.name}
                 src={avatar.url}
                 alt={avatar.name}
-                height={50}
-                width={50}
-                style={{
-                  objectFit: 'contain',
-                  position: 'static',
-                  margin: '0 80px',
-                }}
+                decoding="async"
+                height="50"
+                width="50"
               />
           ))}
         </div>
