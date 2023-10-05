@@ -2,6 +2,8 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import {useEffect, useState} from "react";
+import { motion } from 'framer-motion';
+
 
 const avatarList = [
   {
@@ -21,6 +23,33 @@ const avatarList = [
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  function handleMouseEnter() {
+    setIsHovered(true);
+  }
+  function handleMouseLeave() {
+    setIsHovered(false);
+  }
+
+  const variants = {
+    hover: {
+      width: [0, 230],
+      transition: {
+        duration: 0.25,
+        type: 'tween',
+        ease: 'easeIn',
+      },
+    },
+    initial: {
+      width: 0,
+      transition: {
+        duration: 0.25,
+        type: 'tween',
+        ease: 'easeIn',
+      },
+    },
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -114,7 +143,12 @@ export default function Home() {
           </p>
         </a>
       </div>
-      <main>
+      <main onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <motion.div
+            className="absolute bg-purple-60 h-0.5 left-0 rounded-sm -top-[0.5px]"
+            variants={variants}
+            animate={isHovered ? 'hover' : 'initial'}
+        />
         <div>
           {avatarList.map((avatar) => (
               <img
