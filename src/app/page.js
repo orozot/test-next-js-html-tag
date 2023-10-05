@@ -1,6 +1,22 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 
+const avatarList = [
+  {
+    url: `https://picsum.photos/64?token=${Math.random()}`,
+    name: 's',
+  },
+  {
+    url: `https://picsum.photos/64?token=${Math.random()}`,
+    name: 'a',
+  },
+  {
+    url: `https://picsum.photos/64?token=${Math.random()}`,
+    name: 'b',
+  },
+];
+
+
 export default function Home() {
   return (
     <main className={styles.main}>
@@ -89,6 +105,23 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
+      </div>
+      <div>
+        <div>
+          {avatarList.map((avatar) => (
+              <Image
+                src={avatar.url}
+                alt={avatar.name}
+                height={50}
+                width={50}
+                style={{
+                  objectFit: 'contain',
+                  position: 'static',
+                  margin: '0 80px',
+                }}
+              />
+          ))}
+        </div>
       </div>
     </main>
   )
