@@ -114,7 +114,7 @@ export default function Home() {
           </p>
         </a>
       </div>
-      <div>
+      <main>
         <div>
           {avatarList.map((avatar) => (
               <img
@@ -127,7 +127,7 @@ export default function Home() {
               />
           ))}
         </div>
-      </div>
+      </main>
     </main>
   )
 }
